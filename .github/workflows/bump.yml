@@ -16,7 +16,7 @@ jobs:
         with:
           github-token: ${{ secrets.PAT_GITHUB }}
           github-repository:  ${{ github.repository }}
-          github-sha: ${{ github.token }}
+          github-sha: ${{ github.sha }}
 
       - name: Get the result
         run: echo "The result was ${{ steps.omt.outputs.result }}"
