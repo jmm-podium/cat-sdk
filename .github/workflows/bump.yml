@@ -14,7 +14,9 @@ jobs:
         uses: jmm-podium/one-more-time@main
         id: omt
         with:
-          github-token: "token"
+          github-token: ${{ secrets.PAT_GITHUB }}
+          github-repository:  ${{ github.repository }}
+          github-sha: ${{ github.token }}
 
       - name: Get the result
         run: echo "The result was ${{ steps.omt.outputs.result }}"
