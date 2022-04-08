@@ -1,13 +1,12 @@
-on:
-  push:
-    branches:
-      - main
+on: [push]
+
 jobs:
   update-changelog:
-    if: github.event.pull_request.merged == 'true'
     runs-on: ubuntu-latest
     name: A job to say hello
     steps:
+      - run: echo "${{ github.event_name }}"
+      - run: echo "${{ github.head_ref }}"
       - name: Checkout
         uses: actions/checkout@v2
 
