@@ -10,13 +10,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Read .SEMVER file
+        id: getversion
+        run: echo "::set-output name=version::$(cat .SEMVER)"
+
       - name: One More Time
-        uses: jmm-podium/one-more-time@main
-        id: omt
+        uses: podium-education/kraken@main
+        id: kraken
         with:
           github-token: ${{ secrets.PAT_GITHUB }}
           github-repository:  ${{ github.repository }}
           github-sha: ${{ github.sha }}
+          version: ${{ steps.getversion.outputs.version }}
 
       - name: Get the result
-        run: echo "The result was ${{ steps.omt.outputs.result }}"
+        run: echo "The result was ${{ steps.kraken.outputs.result }}"
