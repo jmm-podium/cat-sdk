@@ -14,13 +14,15 @@ jobs:
         run: echo "::set-output name=version::$(cat .SEMVER)"
 
       - name: Update Changelog
-        uses: podium-education/kraken@v0.3.3
+        uses: podium-education/kraken@v0.4.0-gittag
         id: kraken
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           github-repository:  ${{ github.repository }}
           github-sha: ${{ github.sha }}
           version: ${{ steps.getversion.outputs.version }}
+          git-tag-mode: on
+          git-tag-format: v<version>
 
       - name: Get the result
         run: echo "The result was ${{ steps.kraken.outputs.result }}"
